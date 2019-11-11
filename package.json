@@ -1,0 +1,23 @@
+{
+  "name": "paytm-pg-node-sdk-sample",
+  "description": "Paytm Node Sample Project",
+  "version": "1.0.1",
+  "author": "Rahul Verma",
+  "keywords": [
+    "Test",
+    "Client",
+    "SDK",
+    "Node"
+  ],
+  "homepage": "https://developer.paytm.com/docs/sdk-references/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paytm/paytm-pg-node-sdk-sample"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "paytm-pg-node-sdk": "1.0.1"
+  }
+}
