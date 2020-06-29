@@ -259,11 +259,11 @@ class DemoApp {
         try {
             /** ..... Merchants code here .... */
             /** 5. Merchants who want to do refund */
-            /** Unique order for each order request */
+            /** Order id for which refund request needs to be raised */
             var orderId = "YOUR_ORDER_ID";
-            /** REF ID returned in Paytm\pg\process\Refund call */
+            /** Unique refund id */
             var refId = "UNIQUE_REFUND_ID";
-            /** Transaction ID returned in Paytm\pg\process\Refund Api */
+            /** Transaction ID returned in Paytm\pg\process\PaymentStatus Api */
             var txnId = "PAYTM_TRANSACTION_ID";
             /** Transaction Type returned in Paytm\pg\process\Refund Api */
             var txnType = "REFUND";
@@ -316,9 +316,9 @@ class DemoApp {
         try {
             /** ..... Merchants code here .... */
             /** 4. Merchants who want to get Paytm\pg\process\Refund Status */
-            /** Unique order for each order request */
+            /** Order id for which refund status needs to be checked */
             var orderId = "YOUR_ORDER_ID";
-            /** Unique ref id for each refund request */
+            /** Refund id of the refund request for which refund status needs to be checked */
             var refId = "YOUR_REFUND_ID";
             var readTimeout = 8000;
             /**
@@ -329,9 +329,6 @@ class DemoApp {
             var refundStatusDetail = refundStatusDetailBuilder
                 .setReadTimeout(readTimeout)
                 .build();
-            // Following 2 lines are only for testing purpose
-            Paytm.MerchantProperties.setMid("YOUR_MID_HERE");
-            Paytm.MerchantProperties.setMerchantKey("YOUR_KEY_HERE");
             /**
              * Making call to SDK method which will return the
              * Paytm\merchant\models\SDKResponse(Paytm\pg\request\NativeRefundStatusRequest) that holds Paytm\pg\process\Refund Status of any
@@ -359,13 +356,19 @@ class DemoApp {
     static setInitialParameters() {
         try {
             var env = Paytm.LibraryConstants.STAGING_ENVIRONMENT;
-            // Following mid and key is for create txn API
+            /* Find your Merchant ID and Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
             var mid = "YOUR_MID_HERE";
             var key = "YOUR_KEY_HERE";
+            /* Website: For Staging - WEBSTAGING, For Production - DEFAULT */
             var website = "YOUR_WEBSITE_NAME";
+            /* Client Id e.g C11 */
+            var client_id = "YOUR_CLIENT_ID_HERE";
+
+            var callbackUrl = "MERCHANT_CALLBACK_URL";
+            Paytm.MerchantProperties.setCallbackUrl(callbackUrl);
 
             /** Initialize mandatory Parameters */
-            Paytm.MerchantProperties.initialize(env, mid, key, website);
+            Paytm.MerchantProperties.initialize(env, mid, key, client_id, website);
             /** Setting timeout for connection i.e. Connection Timeout */
             Paytm.MerchantProperties.setConnectionTimeout(5000);
         }
